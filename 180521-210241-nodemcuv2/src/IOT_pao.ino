@@ -29,6 +29,7 @@ void loop() {
   Serial.println();
   Serial.print("connected: ");
   Serial.println(WiFi.localIP());
+  Serial.println("Hello My name is Suprakorn Sopradit");
   //hello
 
 }
