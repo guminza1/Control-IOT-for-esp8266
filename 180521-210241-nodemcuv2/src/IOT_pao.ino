@@ -7,6 +7,9 @@
 #define WIFI_SSID "CG Academy Club"
 #define WIFI_PASSWORD "cg24992399"
 
+#define FIREBASE_HOST "iot-control-switch.firebaseio.com"
+#define FIREBASE_AUTH "Zk7iERYR8iC1kEAysVYzM6lDUeFFfCmyRimmZcYm"
+
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
@@ -22,14 +25,16 @@ void setup() {
   Serial.print("connected: ");
   Serial.println(WiFi.localIP());
 
+  Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
+
+
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  Serial.println();
-  Serial.print("connected: ");
-  Serial.println(WiFi.localIP());
-  Serial.println("Hello My name is Suprakorn Sopradit");
-  //hello
-
+  // String a = Firebase.getString("a/");
+  // Serial.println(a);
+  for (size_t i = 0; i < 1000; i++) {
+  Serial.println(i);
+  delay(10);
+}
 }
