@@ -12,8 +12,10 @@ String Day() {
   struct tm* p_tm = localtime(&now);
   ctime(&now);
   char *a[] = {ctime(&now)};
-  String i = String(i + *a);
-  num_day = p_tm->tm_mday;
+  String j = String(j + *a);
+hour = p_tm->tm_hour;
+minute = p_tm->tm_min;
 
-  return i;
+
+  return j;
 }
