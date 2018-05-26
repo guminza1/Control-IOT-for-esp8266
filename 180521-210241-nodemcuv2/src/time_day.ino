@@ -15,7 +15,5 @@ String Day() {
   String j = String(j + *a);
 hour = p_tm->tm_hour;
 minute = p_tm->tm_min;
-
-
   return j;
 }

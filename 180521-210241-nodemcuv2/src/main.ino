@@ -82,7 +82,7 @@ void loop() {
   if(day == "Wed"){
     String sw_day = Firebase.getString("/control/Switch/sw_day/sw_wed");
     if(sw_day == "\"on\""){
-work();
+      work();
     }
   }
 
