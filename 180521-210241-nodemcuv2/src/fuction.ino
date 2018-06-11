@@ -13,8 +13,7 @@ void work(){
   if(unit_water == "\"h\""){
     delay_w *= 3600000;
   }
-Serial.print("delay = ");
-Serial.println(delay_w);
+
   h_m = String(hour)+String(minute);
   t = h_m.toInt();
 
@@ -25,16 +24,16 @@ Serial.println(delay_w);
     tm = sub_x.toInt();
     if (tm == t && set_loopwork == 1) {
       set_loopwork = 0;
-      Serial.println("morning working");
-      digitalWrite(pin.pin_sl1,LOW);
-      digitalWrite(pin.pin_sl2,LOW);
-      digitalWrite(pin.pin_sl3,LOW);
-      digitalWrite(pin.pin_sl4,LOW);
-      delay(delay_w);
       digitalWrite(pin.pin_sl1,HIGH);
       digitalWrite(pin.pin_sl2,HIGH);
       digitalWrite(pin.pin_sl3,HIGH);
       digitalWrite(pin.pin_sl4,HIGH);
+      delay(delay_w);
+      digitalWrite(pin.pin_sl1,LOW);
+      digitalWrite(pin.pin_sl2,LOW);
+      digitalWrite(pin.pin_sl3,LOW);
+      digitalWrite(pin.pin_sl4,LOW);
+
     }
   }
 
@@ -45,19 +44,40 @@ Serial.println(delay_w);
     te = sub_y.toInt();
     if (te == t && set_loopwork == 1) {
       set_loopwork = 0;
-      Serial.println("evening working");
-      digitalWrite(pin.pin_sl1,LOW);
-      digitalWrite(pin.pin_sl2,LOW);
-      digitalWrite(pin.pin_sl3,LOW);
-      digitalWrite(pin.pin_sl4,LOW);
-      delay(delay_w);
       digitalWrite(pin.pin_sl1,HIGH);
       digitalWrite(pin.pin_sl2,HIGH);
       digitalWrite(pin.pin_sl3,HIGH);
       digitalWrite(pin.pin_sl4,HIGH);
+      delay(delay_w);
+      digitalWrite(pin.pin_sl1,LOW);
+      digitalWrite(pin.pin_sl2,LOW);
+      digitalWrite(pin.pin_sl3,LOW);
+      digitalWrite(pin.pin_sl4,LOW);
     }
   }
   if ((tm != t) && (te != t)) {
     set_loopwork = 1;
+  }
+}
+
+void tem_hu() {                     //fuction temperrature & humidity
+  tem = dht.readTemperature();
+  hu  = dht.readHumidity();
+  if (isnan(tem)) {
+    tem = 0;
+  }
+  if(isnan(hu)){
+    hu = 0;
+  }
+  static int x = 0 ,y = 0;
+  if(hu != x ){
+    Firebase.setInt("control/Tem_Hu/hu",hu);
+    x = hu;
+    Serial.println("set hu");
+  }
+  if(tem != y){
+    Firebase.setInt("control/Tem_Hu/tem",tem);
+    y = tem;
+    Serial.println("set tem");
   }
 }
