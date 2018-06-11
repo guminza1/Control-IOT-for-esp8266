@@ -77,13 +77,6 @@ void loop() {
     Serial.println(WiFi.localIP());
     check_net = 0;
   }
-  while(Firebase.failed()) {
-    digitalWrite(pin.pin_led,LOW);
-    delay(1000);
-    digitalWrite(pin.pin_led,HIGH);
-    delay(1000);
-    Serial.println(Firebase.error());
-  }
 
   static unsigned long count_dht = 0;                  //timer  tem & hu
   if( millis()> count_dht ){                           //read tem & hu every 3 seconds
